@@ -1,5 +1,5 @@
 import { LoggingService } from "./logging.service";
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 
 // Tells angular that this service in injectable - that something
 // can be injected in HERE. You use this in the RECEIVING service, not the
@@ -22,6 +22,7 @@ export class AccountsService {
         }
     ];
 
+    statusUpdated = new EventEmitter<string>();
 
     constructor(private loggingService: LoggingService) {}
 
