@@ -1,3 +1,11 @@
+import { LoggingService } from "./logging.service";
+import { Injectable } from "@angular/core";
+
+// Tells angular that this service in injectable - that something
+// can be injected in HERE. You use this in the RECEIVING service, not the
+// service that you're injecting
+@Injectable() 
+
 export class AccountsService {
     accounts = [
         {
@@ -12,13 +20,18 @@ export class AccountsService {
           name: 'Hidden Account',
           status: 'unknown'
         }
-      ];
+    ];
+
+
+    constructor(private loggingService: LoggingService) {}
 
     addAccount(name: string, status: string) {
         this.accounts.push({name: name, status: status});
+        this.loggingService.logStatusChange(status);
     }
 
     updateStatus(id: number, status: string) {
         this.accounts[id].status = status;
+        this.loggingService.logStatusChange(status);
     }
 }
